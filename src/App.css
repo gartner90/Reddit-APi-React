@@ -1,0 +1,180 @@
+:root {
+    --orange-color: #FF3C00;    
+}
+
+.rd-side-left {
+  background-color: #7d7d7d;
+  color: #fff;
+  height: 100vh;
+  border-right: solid var(--orange-color) 4px;
+  position: relative;
+}
+
+.rd-posts-content {
+  overflow-y: scroll;
+  height: calc(100vh - 90px);
+}
+
+.rd-card-content {
+  position: relative;
+  transition: all 0s;
+  opacity: 1;
+  max-height: 500px;
+}
+
+.rd-card-hide {
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: all .5s ease;
+}
+
+.rd-card {
+  position: relative;
+  background-color: #5d5a5a;
+  padding: 10px;
+  margin: 13px 0;
+  border-radius: 10px;
+  width: 98%;
+}
+
+  .rd-card.active {
+    border: solid 2px var(--orange-color);
+    padding: 8px;
+  }
+
+  .rd-delete {
+    float: right;
+    transition: all .5s ease;
+    cursor: pointer;
+    top: 10px;
+    right: 16px;
+    z-index: 1;
+  }
+
+    .rd-delete:hover {
+      color: var(--orange-color);
+    }
+
+  .rd-img-new {
+    position: absolute;
+    width: 40px;
+    top: -10px;
+  }
+
+  .rd-card-author {
+    margin-bottom: 5px;
+  }
+
+  .rd-card-title-date {
+    font-size: 12px;
+    opacity: .6;
+  }
+
+  .rd-card-thumb img {
+    width: 100%;
+  }
+
+  .rd-card-title {
+  max-height: 120px;
+  overflow: hidden;
+  }
+
+  .rd-card-comments {
+  margin-top: 7px;
+  font-size: 12px;
+  }
+
+.rd-detail-image {
+  display: block;
+  max-width: 300px;
+}
+
+.rd-detail-iframe {
+  height: 600px !important;
+  position: relative!important;
+}
+
+#page-numbers {
+  padding: 0;
+  text-align: center;
+}
+
+  #page-numbers li {
+    display: inline-block;
+    background-color: #fff;
+    margin: 5px 5px 0;
+    color: #5d5a5a;
+    width: 23px;
+    font-weight: bold;
+    border-radius: 8px;
+    cursor: pointer;
+  }
+
+    #page-numbers li.active {
+      background-color: var(--orange-color);
+      color: #ffffff;
+    }
+
+.rd-btn-side {
+  position: absolute;
+  right: -53px;
+  bottom: 0;
+  z-index: 1;
+  color: #020202;
+  font-size: 17px;
+  cursor: pointer;
+}
+
+.rd-restore {
+  top: 0px;
+  right: -90px;
+  height: 25px;
+}
+
+@media screen and (max-width: 768px) {
+  .rd-detail-image {
+    max-width: 100%;
+  }
+
+  .rd-side-left {
+    height: 360px;
+    border-bottom: solid var(--orange-color) 4px;
+    border-right: 0;
+  }
+
+  .rd-card-content {
+    width: 160px;
+    flex-wrap:  nowrap;
+    display: inline-block;
+    vertical-align: top;
+    margin-right: 15px;
+  }
+
+  .rd-posts-content {
+    overflow: auto;
+    white-space: nowrap;
+    height: auto;
+  }
+
+  .rd-btn-side.rd-delete-all {
+    bottom: 10px;
+    right: 14px;
+    color: #fff;
+  }
+
+  .rd-delete {
+    top: 21px;
+    right: 11px;
+  }
+
+  .rd-card-title-date {
+    display: block;
+  }
+
+  .rd-btn-side.rd-restore {
+    right: 10px;
+    top: 8px;
+    color: #fff;
+  }
+}
