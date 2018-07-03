@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Post from '../components/Post';
+import { Glyphicon } from 'react-bootstrap';
 
 class List extends Component {
   constructor() {
@@ -16,7 +17,7 @@ class List extends Component {
   }
 
   render() {
-    const { posts, setPost } = this.props;
+    const { posts, setPost, hidePost, selected, hideAll } = this.props;
     const { currentPage } = this.state;
     const postsPerPage = 10;
     
@@ -33,6 +34,9 @@ class List extends Component {
       <Post
         post={item.data}
         setPost={setPost}
+        hidePost={hidePost}
+        selected={selected}
+        index={i}
         position={(currentPage - 1) * postsPerPage + i}
         key={i}
       />
@@ -49,16 +53,20 @@ class List extends Component {
         </li>
       );
     });
-    
+
     return (
-      <section>
+      <section className="sidebar-container">
         <h3>Top Reddit Posts</h3>
-        <div>
+        <div className="rd-posts-content">
           {finalPosts}
         </div>
         <ul id="page-numbers">
           {posts.length > 0 ? renderPageNumbers : null}
         </ul>
+        <a onClick={(num) => hideAll()} className="rd-btn-side rd-delete-all">
+          All 
+          <Glyphicon glyph="trash"/>
+        </a>
       </section>
     );
   }

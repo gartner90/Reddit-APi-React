@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { Row, Col } from 'react-bootstrap';
+import { Row, Col, Glyphicon } from 'react-bootstrap';
 import List from './components/List';
 import Detail from './components/Detail';
 import './App.css';
@@ -10,9 +10,12 @@ class App extends Component {
     super();
 
     this.state = {
+      selected: null,
       posts: [],
     }
+  }
 
+  componentDidMount() {
     this.getData();
   }
 
@@ -24,17 +27,43 @@ class App extends Component {
       })
   }
 
-  componentDidMount() {
-    this.getData();
+  hidePost = (position) => {
+    let newArray = [...this.state.posts];
+    newArray[position].data.hide = true;
+
+    this.setState({
+        selected: null,
+        posts: newArray,
+    });
+
+    setTimeout(() => {
+      newArray.splice(position, 1);
+      this.setState({posts: newArray});
+    }, 600);
+  }
+
+  hideAll = () => {
+    let newArray = [...this.state.posts];
+    newArray.forEach((post, index) => {
+      newArray[index].data.hide = true;
+    });
+    this.setState({posts: newArray});
+
+    setTimeout(() => {
+      this.setState({posts: []});
+    }, 600);
   }
 
   setPost = (position) => {
-    console.log('position', position);
+    let newArray = [...this.state.posts];
+    newArray[position].data.readed = true;
+
     this.setState({
         selected: position,
+        posts: newArray,
     });
   }
-
+  
   render() {
     const currentPost = this.state.posts[this.state.selected];
     const { posts, selected } = this.state;
@@ -42,18 +71,23 @@ class App extends Component {
     return (
       <div className="container-fluid">
         <Row>
-            <Col sm={4} xs={12}>
-              { this.state.posts.length > 0 ?
-                <List 
-                  posts={posts}
-                  setPost={this.setPost} 
-                  selected={selected}
-                />
-              : null }
-            </Col>
-            <Col sm={8} xs={12}>
-              { currentPost ? <Detail post={currentPost.data}/> : null }
-            </Col>
+          <Col sm={4} className="rd-side-left">
+            <a onClick={(e) => this.getData()} className="rd-btn-side rd-restore">
+              Restore <Glyphicon glyph="repeat"/>
+            </a>
+            { this.state.posts.length > 0 ?
+              <List 
+                posts={posts} 
+                setPost={this.setPost} 
+                hidePost={this.hidePost} 
+                hideAll={this.hideAll} 
+                selected={selected}
+              />
+            : null }
+          </Col>
+          <Col sm={8}>
+            { currentPost ? <Detail post={currentPost.data}  className="rd-post-content"/> : null }
+          </Col>
         </Row>
       </div>
     );
