@@ -28,8 +28,16 @@ class App extends Component {
     this.getData();
   }
 
+  setPost = (position) => {
+    console.log('position', position);
+    this.setState({
+        selected: position,
+    });
+  }
+
   render() {
-    const { posts } = this.state;
+    const currentPost = this.state.posts[this.state.selected];
+    const { posts, selected } = this.state;
 
     return (
       <div className="container-fluid">
@@ -37,12 +45,14 @@ class App extends Component {
             <Col sm={4} xs={12}>
               { this.state.posts.length > 0 ?
                 <List 
-                  posts={posts} 
+                  posts={posts}
+                  setPost={this.setPost} 
+                  selected={selected}
                 />
               : null }
             </Col>
             <Col sm={8} xs={12}>
-              <Detail/>
+              { currentPost ? <Detail post={currentPost.data}/> : null }
             </Col>
         </Row>
       </div>

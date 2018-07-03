@@ -6,10 +6,10 @@ import { Row, Col, Image } from 'react-bootstrap';
 class Post extends Component {
 
   render() {
-    const { post } = this.props;
+    const { post, setPost, position } = this.props;
     return (
       <div>
-        <article>
+        <article onClick={(num) => setPost(position)}>
           <div>
             <span>{post.author} </span>
             <span>
