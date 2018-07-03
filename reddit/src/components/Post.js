@@ -12,7 +12,7 @@ class Post extends Component {
       <div className={`rd-card-content ${post.hide ? 'rd-card-hide' : ''}`}>
         <Glyphicon glyph="trash" className="rd-delete" onClick={(num) => hidePost(position)}/>
         <article className={`rd-card ${selected === position ? 'active' : ''}`} onClick={(num) => setPost(position)}>
-          {!post.readed ? <img className="rd-img-new" src="https://cdn.pixabay.com/photo/2016/07/05/01/07/new-icon-1497910_960_720.png" alt="new"/> : null}
+          {!post.readed ? <img className="rd-img-new" src="img/new.png" alt="new"/> : null}
           <div className="rd-card-author">
             <span className="rd-card-title-text">{post.author} </span>
             <span className="rd-card-title-date">
