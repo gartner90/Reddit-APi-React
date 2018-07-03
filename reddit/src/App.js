@@ -8,7 +8,11 @@ import './App.css';
 class App extends Component {
   constructor() {
     super();
-    
+
+    this.state = {
+      posts: [],
+    }
+
     this.getData();
   }
 
@@ -16,16 +20,26 @@ class App extends Component {
     axios.get('https://www.reddit.com/r/funny/top.json?limit=50')
       .then(response => {
         const data = response.data.data.children;
-        console.log('data', data);
+        this.setState({posts: data});
       })
   }
 
+  componentDidMount() {
+    this.getData();
+  }
+
   render() {
+    const { posts } = this.state;
+
     return (
       <div className="container-fluid">
         <Row>
             <Col sm={4} xs={12}>
-                  <List/>
+              { this.state.posts.length > 0 ?
+                <List 
+                  posts={posts} 
+                />
+              : null }
             </Col>
             <Col sm={8} xs={12}>
               <Detail/>

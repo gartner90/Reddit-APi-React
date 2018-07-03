@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 class Post extends Component {
 
   render() {
-    
+    const { post } = this.props;
     return (
       <article>
-        Post here
+      	{post.title}
       </article>
     );
   }
