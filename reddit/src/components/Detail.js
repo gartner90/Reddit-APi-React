@@ -13,14 +13,14 @@ class Detail extends Component {
       <article>
         <h2>{post.title}</h2>
 
-        {!post.is_video && !post.secure_media_embed.media_domain_url ? <Image src={post.url} rounded/> : null}
+        {!post.is_video && !post.secure_media_embed.media_domain_url ? <Image src={post.url} rounded className="rd-detail-image"/> : null}
         {post.is_video ? <Player src={post.media.reddit_video.fallback_url}/> : null}
-        {post.secure_media_embed.media_domain_url ? <Iframe url={post.secure_media_embed.media_domain_url}/> : null}
+        {post.secure_media_embed.media_domain_url ? <Iframe url={post.secure_media_embed.media_domain_url} className="rd-detail-iframe"/> : null}
 
         <div>{timestampToDate(post.created)}</div>
-        <div>
-          <span>{post.author} </span>
-          <span>
+        <div className="rd-card-author">
+          <span className="rd-card-title-text">{post.author} </span>
+          <span className="rd-card-title-date">
              | <TimeAgo date={timestampToDate(post.created)}/>
           </span>
         </div>

@@ -16,7 +16,11 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.getData();
+    if (!localStorage.getItem('rd-data')) {
+      this.getData();
+    } else {
+      this.setState({posts: JSON.parse(localStorage.getItem('rd-data'))});
+    }
   }
 
   getData() {
@@ -24,6 +28,7 @@ class App extends Component {
       .then(response => {
         const data = response.data.data.children;
         this.setState({posts: data});
+        localStorage.setItem('rd-data', JSON.stringify(data));
       })
   }
 
@@ -39,6 +44,7 @@ class App extends Component {
     setTimeout(() => {
       newArray.splice(position, 1);
       this.setState({posts: newArray});
+      localStorage.setItem('rd-data', JSON.stringify(newArray));
     }, 600);
   }
 
@@ -51,6 +57,7 @@ class App extends Component {
 
     setTimeout(() => {
       this.setState({posts: []});
+      localStorage.setItem('rd-data', JSON.stringify([]));
     }, 600);
   }
 
@@ -62,6 +69,8 @@ class App extends Component {
         selected: position,
         posts: newArray,
     });
+
+    localStorage.setItem('rd-data', JSON.stringify(newArray));
   }
   
   render() {
