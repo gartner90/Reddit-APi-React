@@ -1,18 +1,21 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Row, Col } from 'react-bootstrap';
+import List from './components/List';
+import Detail from './components/Detail';
 import './App.css';
 
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+      <div className="container-fluid">
+        <Row>
+            <Col sm={4} xs={12}>
+                  <List/>
+            </Col>
+            <Col sm={8} xs={12}>
+              <Detail/>
+            </Col>
+        </Row>
       </div>
     );
   }
